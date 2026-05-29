@@ -175,6 +175,11 @@ function buildDocument(innerHTML: string): string {
       ${WEIGHTED_FONT_FACES}
       ${RESOLVED_CSS}
       [class*="_pos-fixed"][class*="_zi-1000"][class*="_t-0px"] { display: none !important; }
+      /* Keep chip / pill / button labels on a single line so flex chip
+         rows ("IG Story", "IG Reel", "IG Post", "TikTok") don't wrap to
+         2 lines per chip at 393px viewport. */
+      [tabindex="0"] p { white-space: nowrap; }
+      [role="button"] p, [role="tab"] p { white-space: nowrap; }
     </style>
   </head>
   <body>
