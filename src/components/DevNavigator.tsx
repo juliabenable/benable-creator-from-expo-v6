@@ -9,7 +9,7 @@ import {
 } from "@/captured-routes";
 
 /**
- * Floating dev navigator (top-left).
+ * Floating dev navigator (top-right).
  *
  * v5 improvements
  *  - Search box that filters across labels and paths.
@@ -83,7 +83,7 @@ export function DevNavigator() {
         type="button"
         onClick={() => setOpen(true)}
         title={`Benable navigator — ${totals.full} pixel-faithful routes`}
-        className="fixed left-3 top-3 z-[1000000] flex h-10 w-10 items-center justify-center rounded-full border border-border bg-white/95 text-[15px] font-bold text-primary shadow-xl backdrop-blur transition-transform hover:scale-105"
+        className="fixed right-3 top-3 z-[1000000] flex h-10 w-10 items-center justify-center rounded-full border border-border bg-white/95 text-[15px] font-bold text-primary shadow-xl backdrop-blur transition-transform hover:scale-105"
       >
         B
       </button>
@@ -91,7 +91,7 @@ export function DevNavigator() {
   }
 
   return (
-    <div className="fixed left-3 top-3 z-[1000000] max-h-[calc(100vh-1.5rem)] w-[280px] overflow-hidden rounded-xl border border-border bg-white/95 shadow-xl backdrop-blur">
+    <div className="fixed right-3 top-3 z-[1000000] max-h-[calc(100vh-1.5rem)] w-[280px] overflow-hidden rounded-xl border border-border bg-white/95 shadow-xl backdrop-blur">
       {/* Header */}
       <button
         type="button"
