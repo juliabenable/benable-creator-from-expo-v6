@@ -113,6 +113,78 @@ const TEXT_NAV_MAP: Record<string, string> = {
 
   // Campaign entry from card
   "View Details": "/campaign/78",
+
+  // Global cross-screen shortcuts — same label means same thing everywhere
+  "View List": "/bernadette/lists/skincare-must-have",
+  "Back to Home": "/brand-collabs",
+};
+
+/**
+ * Per-route nav table — keyed by route key. Same button text can mean
+ * different things on different screens (a "Submit for Review" on the
+ * Add-content screen advances to Draft-ready; on Draft-ready it advances
+ * to Under-review). PER_ROUTE_NAV wins over TEXT_NAV_MAP when both match.
+ *
+ * The keys here are routeKey values from src/captured-routes.ts.
+ */
+const PER_ROUTE_NAV: Record<string, Record<string, string>> = {
+  // Step 1 → Step 2  (Respond to invite → Product selection)
+  // Note: the staging app's campaign 78 is currently past this state, so
+  //       the captured screen actually shows the completion state with
+  //       "Back to Home" / "View List" — those buttons are covered by the
+  //       global map above, so nothing to add here.
+  "campaign-respond-to-invite": {},
+
+  // Step 2 → Step 3  (Product selection → Confirm address)
+  "campaign-product-selection": {
+    "Confirm Address": "/campaign/78/delivery",
+  },
+
+  // Step 3 → Step 4a  (Confirm address → Awaiting tracking)
+  "campaign-delivery-confirm": {
+    "Yup, looks good": "/campaign/78/awaiting-tracking",
+  },
+
+  // Step 4a → Step 4b  (Awaiting tracking → Shipped)
+  "campaign-delivery-awaiting": {
+    "I have the product": "/campaign/78/shipped",
+  },
+
+  // Step 4b → Step 5a  (Shipped → Content prompt)
+  "campaign-delivery-shipped": {
+    "I have the product": "/campaign/78/content",
+  },
+
+  // Step 5a → Step 5b  (Content prompt → Add content form)
+  "campaign-content-prompt": {
+    "Add Content": "/campaign/78/add-content",
+  },
+
+  // Step 5b → Step 5c  (Add content form → Draft ready)
+  "campaign-add-content": {
+    "Submit for Review": "/campaign/78/ready-to-submit",
+  },
+
+  // Step 5c → Step 6  (Draft ready → Under review)
+  "campaign-content-submitted": {
+    "Submit for Review": "/campaign/78/under-review",
+  },
+
+  // Step 6: under review — no forward button (awaiting brand review)
+  "campaign-under-review": {},
+
+  // Step 7 → Step 8  (Changes requested → Time to post)
+  "campaign-changes-requested": {
+    "I've made changes": "/campaign/78/time-to-post",
+  },
+
+  // Step 8 → Step 9  (Time to post → Congrats)
+  "campaign-time-to-post": {
+    "I've Published My Content": "/campaign/78/congrats",
+  },
+
+  // Step 9: congrats — "Back to Home" handled by global map
+  "campaign-congrats": {},
 };
 
 /**
@@ -121,17 +193,22 @@ const TEXT_NAV_MAP: Record<string, string> = {
  * matches clicks against the text → route map. When a match is found, the
  * iframe posts a message to the parent which navigates React Router.
  */
-function buildNavScript(): string {
+function buildNavScript(routeKey: string): string {
+  const perRoute = PER_ROUTE_NAV[routeKey] || {};
   return `
     (function() {
+      const PER_ROUTE = ${JSON.stringify(perRoute)};
       const MAP = ${JSON.stringify(TEXT_NAV_MAP)};
       function findRoute(target) {
         // Walk up: if any ancestor's textContent (when its child count is 0)
-        // matches a known label, return its route. Also check immediate
-        // descendants for the case where the click hits a parent wrapper.
+        // matches a known label, return its route. PER_ROUTE wins over MAP
+        // because the same button text means different things on different
+        // captured screens (e.g. "Submit for Review" advances by 1 step
+        // wherever it appears).
         let n = target;
         for (let i = 0; i < 8 && n; i++) {
           const t = (n.textContent || '').trim();
+          if (PER_ROUTE[t]) return PER_ROUTE[t];
           if (MAP[t]) return MAP[t];
           // For role="tab" with aria-label
           if (n.getAttribute && n.getAttribute('role') === 'tab') {
@@ -158,7 +235,7 @@ function buildNavScript(): string {
   `;
 }
 
-function buildDocument(innerHTML: string): string {
+function buildDocument(innerHTML: string, routeKey: string): string {
   return `<!DOCTYPE html>
 <html lang="en">
   <head>
@@ -184,7 +261,7 @@ function buildDocument(innerHTML: string): string {
   </head>
   <body>
     ${innerHTML}
-    <script>${buildNavScript()}</script>
+    <script>${buildNavScript(routeKey)}</script>
   </body>
 </html>`;
 }
@@ -219,7 +296,7 @@ export function CapturedScreen({ routeKey }: { routeKey: RouteKey }) {
     loadRouteHTML(routeKey)
       .then((html) => {
         if (cancelled) return;
-        setDoc(buildDocument(html));
+        setDoc(buildDocument(html, routeKey));
         setStatus("ready");
       })
       .catch((e: Error) => {
