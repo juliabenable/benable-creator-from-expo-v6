@@ -1,0 +1,296 @@
+{
+  "sign-up": {
+    "file": "sign-up.html",
+    "source": "00-sign-up-full-baked.html",
+    "path": "/sign-up",
+    "label": "Sign up",
+    "bake": "full"
+  },
+  "sign-in": {
+    "file": "sign-in.html",
+    "source": "02-sign-in-full-baked.html",
+    "path": "/sign-in",
+    "label": "Sign in",
+    "bake": "full"
+  },
+  "discover": {
+    "file": "discover.html",
+    "source": "01-discover-full-baked.html",
+    "path": "/discover",
+    "label": "Discover",
+    "bake": "full"
+  },
+  "notifications": {
+    "file": "notifications.html",
+    "source": "04-notifications-full-baked.html",
+    "path": "/notifications",
+    "label": "Notifications",
+    "bake": "full"
+  },
+  "profile": {
+    "file": "profile.html",
+    "source": "05-profile-full-baked.html",
+    "path": "/profile",
+    "label": "Profile (empty)",
+    "bake": "full"
+  },
+  "dashboard": {
+    "file": "dashboard.html",
+    "source": "06-dashboard-full-baked.html",
+    "path": "/dashboard",
+    "label": "Dashboard",
+    "bake": "full"
+  },
+  "dashboard-insights": {
+    "file": "dashboard-insights.html",
+    "source": "12-dashboard-insights-full-baked.html",
+    "path": "/dashboard/insights",
+    "label": "Dashboard \u203a Insights",
+    "bake": "full"
+  },
+  "dashboard-cashback": {
+    "file": "dashboard-cashback.html",
+    "source": "13-dashboard-cashback-full-baked.html",
+    "path": "/dashboard/cashback",
+    "label": "Dashboard \u203a Cashback",
+    "bake": "full"
+  },
+  "global-search": {
+    "file": "global-search.html",
+    "source": "08-global-search-full-baked.html",
+    "path": "/global-search",
+    "label": "Global search",
+    "bake": "full"
+  },
+  "bookmarks": {
+    "file": "bookmarks.html",
+    "source": "09-bookmarks-full-baked.html",
+    "path": "/bookmarks",
+    "label": "Bookmarks",
+    "bake": "full"
+  },
+  "settings": {
+    "file": "settings.html",
+    "source": "10-settings-full-baked.html",
+    "path": "/settings",
+    "label": "Settings",
+    "bake": "full"
+  },
+  "user-profile": {
+    "file": "user-profile.html",
+    "source": "07-profile-bernadette-full-baked.html",
+    "path": "/bernadette",
+    "label": "User profile (Bernadette)",
+    "bake": "full"
+  },
+  "list-detail": {
+    "file": "list-detail.html",
+    "source": "14-list-detail-full-baked.html",
+    "path": "/bernadette/lists/skincare-must-have",
+    "label": "List detail",
+    "bake": "full"
+  },
+  "brand-collabs": {
+    "file": "brand-collabs.html",
+    "source": "11-brand-collabs-full-baked.html",
+    "path": "/brand-collabs",
+    "label": "Brand Collabs \u203a Active",
+    "bake": "full"
+  },
+  "brand-collabs-new": {
+    "file": "brand-collabs-new.html",
+    "source": "18-brand-collabs-new-full-baked.html",
+    "path": "/brand-collabs/new",
+    "label": "Brand Collabs \u203a New",
+    "bake": "full"
+  },
+  "brand-collabs-finished": {
+    "file": "brand-collabs-finished.html",
+    "source": "19-brand-collabs-finished-full-baked.html",
+    "path": "/brand-collabs/finished",
+    "label": "Brand Collabs \u203a Finished",
+    "bake": "full"
+  },
+  "campaign-respond-to-invite": {
+    "file": "campaign-respond-to-invite.html",
+    "source": "21-campaign-respond-to-invite-full-baked.html",
+    "path": "/campaign/78",
+    "label": "Campaign \u203a Respond to invite",
+    "bake": "full"
+  },
+  "campaign-product-selection": {
+    "file": "campaign-product-selection.html",
+    "source": "22-step-product-selection-full-baked.html",
+    "path": "/campaign/78/product",
+    "label": "Campaign \u203a Product selection",
+    "bake": "full"
+  },
+  "campaign-delivery-confirm": {
+    "file": "campaign-delivery-confirm.html",
+    "source": "23-step-delivery-confirm-full-baked.html",
+    "path": "/campaign/78/delivery",
+    "label": "Campaign \u203a Confirm address",
+    "bake": "full"
+  },
+  "campaign-delivery-awaiting": {
+    "file": "campaign-delivery-awaiting.html",
+    "source": "24-step-delivery-awaiting-full-baked.html",
+    "path": "/campaign/78/awaiting-tracking",
+    "label": "Campaign \u203a Awaiting tracking",
+    "bake": "full"
+  },
+  "campaign-delivery-shipped": {
+    "file": "campaign-delivery-shipped.html",
+    "source": "26-step-delivery-shipped-full-baked.html",
+    "path": "/campaign/78/shipped",
+    "label": "Campaign \u203a Shipped",
+    "bake": "full"
+  },
+  "campaign-content-prompt": {
+    "file": "campaign-content-prompt.html",
+    "source": "28-step-content-upload-prompt-full-baked.html",
+    "path": "/campaign/78/content",
+    "label": "Campaign \u203a Content prompt",
+    "bake": "full"
+  },
+  "campaign-add-content": {
+    "file": "campaign-add-content.html",
+    "source": "29-step-content-add-form-full-baked.html",
+    "path": "/campaign/78/add-content",
+    "label": "Campaign \u203a Add content form",
+    "bake": "full"
+  },
+  "campaign-content-submitted": {
+    "file": "campaign-content-submitted.html",
+    "source": "33-step-content-ready-to-submit-full-baked.html",
+    "path": "/campaign/78/ready-to-submit",
+    "label": "Campaign \u203a Draft ready",
+    "bake": "full"
+  },
+  "campaign-under-review": {
+    "file": "campaign-under-review.html",
+    "source": "34-step-content-under-review-full-baked.html",
+    "path": "/campaign/78/under-review",
+    "label": "Campaign \u203a Under review",
+    "bake": "full"
+  },
+  "campaign-changes-requested": {
+    "file": "campaign-changes-requested.html",
+    "source": "35-step-changes-requested.html",
+    "path": "/campaign/78/changes-requested",
+    "label": "Campaign \u203a Changes requested",
+    "bake": "none"
+  },
+  "campaign-time-to-post": {
+    "file": "campaign-time-to-post.html",
+    "source": "36-step-publish-time-to-post.html",
+    "path": "/campaign/78/time-to-post",
+    "label": "Campaign \u203a Time to post",
+    "bake": "none"
+  },
+  "campaign-congrats": {
+    "file": "campaign-congrats.html",
+    "source": "38-step-publish-congrats-full-baked.html",
+    "path": "/campaign/78/congrats",
+    "label": "Campaign \u203a Congrats",
+    "bake": "full"
+  },
+  "notifications-likes": {
+    "file": "notifications-likes.html",
+    "source": "40-notifications-likes-full-baked.html",
+    "path": "/notifications/likes",
+    "label": "Notifications \u203a Likes",
+    "bake": "full"
+  },
+  "notifications-comments": {
+    "file": "notifications-comments.html",
+    "source": "41-notifications-comments-full-baked.html",
+    "path": "/notifications/comments",
+    "label": "Notifications \u203a Comments",
+    "bake": "full"
+  },
+  "notifications-followers": {
+    "file": "notifications-followers.html",
+    "source": "42-notifications-followers-full-baked.html",
+    "path": "/notifications/followers",
+    "label": "Notifications \u203a Followers",
+    "bake": "full"
+  },
+  "invite-friends": {
+    "file": "invite-friends.html",
+    "source": "43-invite-friends-full-baked.html",
+    "path": "/invite-friends",
+    "label": "Invite friends",
+    "bake": "full"
+  },
+  "dashboard-brand-partners": {
+    "file": "dashboard-brand-partners.html",
+    "source": "44-dashboard-brand-partners-full-baked.html",
+    "path": "/dashboard/brand-partners",
+    "label": "Dashboard \u203a Brand partners",
+    "bake": "full"
+  },
+  "dashboard-tune-up": {
+    "file": "dashboard-tune-up.html",
+    "source": "45-dashboard-tune-up-full-baked.html",
+    "path": "/dashboard/tune-up",
+    "label": "Dashboard \u203a Tune-up",
+    "bake": "full"
+  },
+  "optimized-badge": {
+    "file": "optimized-badge.html",
+    "source": "46-optimized-badge-full-baked.html",
+    "path": "/optimized-badge",
+    "label": "Optimized badge",
+    "bake": "full"
+  },
+  "start-trending": {
+    "file": "start-trending.html",
+    "source": "47-start-trending-full-baked.html",
+    "path": "/start-trending",
+    "label": "Start trending (onboarding)",
+    "bake": "full"
+  },
+  "settings-profile": {
+    "file": "settings-profile.html",
+    "source": "48-settings-profile-full-baked.html",
+    "path": "/settings/profile",
+    "label": "Settings \u203a Profile",
+    "bake": "full"
+  },
+  "settings-account": {
+    "file": "settings-account.html",
+    "source": "49-settings-account-full-baked.html",
+    "path": "/settings/account",
+    "label": "Settings \u203a Account",
+    "bake": "full"
+  },
+  "settings-notifications": {
+    "file": "settings-notifications.html",
+    "source": "50-settings-notifications-full-baked.html",
+    "path": "/settings/notifications",
+    "label": "Settings \u203a Notifications",
+    "bake": "full"
+  },
+  "bookmarked-clips": {
+    "file": "bookmarked-clips.html",
+    "source": "51-bookmarked-clips-full-baked.html",
+    "path": "/bookmarked-clips",
+    "label": "Bookmarked clips",
+    "bake": "full"
+  },
+  "settings-cashback": {
+    "file": "settings-cashback.html",
+    "source": "52-settings-cashback-full-baked.html",
+    "path": "/settings/cashback",
+    "label": "Settings \u203a Cashback",
+    "bake": "full"
+  },
+  "dashboard-request-payout": {
+    "file": "dashboard-request-payout.html",
+    "source": "53-dashboard-request-payout-full-baked.html",
+    "path": "/dashboard/request-payout",
+    "label": "Dashboard \u203a Request payout",
+    "bake": "full"
+  }
+}

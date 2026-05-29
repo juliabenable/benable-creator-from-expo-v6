@@ -1,0 +1,158 @@
+@import "tailwindcss";
+
+/* Allow Tailwind to discover utility classes referenced in our own React code
+   (the dev navigator etc.). The captured HTML uses Tamagui atomic CSS — that
+   ships separately as tamagui.css, injected by main.tsx. */
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Inter font family — mirrored from Expo's bundle.
+   The captured Tamagui CSS expects these by name + style/weight.
+   ────────────────────────────────────────────────────────────────────────── */
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/Inter-Regular.otf") format("opentype");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/Inter-Italic.otf") format("opentype");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/Inter-Medium.otf") format("opentype");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/Inter-MediumItalic.otf") format("opentype");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/Inter-SemiBold.otf") format("opentype");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/Inter-SemiBoldItalic.otf") format("opentype");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/Inter-Bold.otf") format("opentype");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("/fonts/Inter-ExtraBold.otf") format("opentype");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: italic;
+  font-weight: 800;
+  font-display: swap;
+  src: url("/fonts/Inter-ExtraBoldItalic.otf") format("opentype");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("/fonts/Inter-Black.otf") format("opentype");
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Tailwind shadcn-style tokens (used by the dev navigator).
+   The captured app has its own Tamagui design tokens — they don't conflict.
+   ────────────────────────────────────────────────────────────────────────── */
+
+@theme inline {
+  --color-background: #FAFAFA;
+  --color-foreground: #1C1C1C;
+  --color-primary: #7A5CFA;
+  --color-primary-foreground: #FFFFFF;
+  --color-muted: #F1F1F1;
+  --color-muted-foreground: #717171;
+  --color-accent: #F5F3FC;
+  --color-accent-foreground: #1C1C1C;
+  --color-border: #E3E3E3;
+  --color-destructive: #FF5567;
+}
+
+@layer base {
+  html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font-family: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Captured-DOM safeguards.
+
+   The captured HTML is the OUTPUT of react-native-web at runtime. RNW's
+   <Image> component sizes its wrapper <div> by reading the JS-prop `style`
+   on mount — those resolved dimensions live in the CSSOM, not the DOM. Our
+   `document.documentElement.outerHTML` snapshot serializes the *markup* but
+   not the runtime styles, so wrappers around <img> elements arrive at us
+   with zero height and an empty class attribute.
+
+   Inside those zero-height wrappers, RNW puts `<img style="position:absolute;
+   inset:0; width:100%; height:100%">`. With a zero-sized parent, the absolute
+   IMG sizes to the next positioned ancestor — for us, the full viewport. That
+   makes a 32×32 avatar render at 393×852. Multiply by 176 images per feed.
+
+   Fix: if the wrapper carries no class (= no Tamagui sizing) and contains a
+   single absolute-positioned image, fall back to the IMG's intrinsic size.
+   Benable already serves through image-proxy with explicit `w:32` /  `w:393`
+   etc, so natural sizing is right by construction.
+   ────────────────────────────────────────────────────────────────────────── */
+
+.benable-captured-html img {
+  /* This intentionally fights the inline style above. Order: width:auto wins
+     against `width:100%` only when the wrapper is unsized. We still want the
+     real-Image use cases (carousel covers etc.) where the wrapper IS sized
+     to fill — so we don't !important everything, just neutralize the
+     inset / 100% trap with `min-`-prefixed limits. */
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.benable-captured-html div:not([class]):not([style]) > img,
+.benable-captured-html div[class=""]:not([style]) > img {
+  /* zero-dimension wrapper case: collapse the IMG to natural size */
+  position: static !important;
+  inset: auto !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+/* Staging banner remnants — preprocessor catches most. */
+.benable-captured-html [class*="_pos-fixed"][class*="_zi-1000"][class*="_t-0px"] {
+  display: none !important;
+}
