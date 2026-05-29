@@ -39,18 +39,41 @@ const FONT_BASE = (() => {
 
 const RESOLVED_CSS = tamaguiCSS.replaceAll("/__BASE__/", `${FONT_BASE}/`);
 
-const NATIONAL_FONT_FACES = `
-  @font-face { font-family: "National2"; font-style: normal; font-weight: 400; src: url("${FONT_BASE}/fonts/National2-Regular.otf") format("opentype"); }
-  @font-face { font-family: "National2"; font-style: italic; font-weight: 400; src: url("${FONT_BASE}/fonts/National2-RegularItalic.otf") format("opentype"); }
-  @font-face { font-family: "National2"; font-style: normal; font-weight: 700; src: url("${FONT_BASE}/fonts/National2-Bold.otf") format("opentype"); }
-  @font-face { font-family: "National2"; font-style: italic; font-weight: 700; src: url("${FONT_BASE}/fonts/National2-BoldItalic.otf") format("opentype"); }
-  @font-face { font-family: "National2"; font-style: normal; font-weight: 800; src: url("${FONT_BASE}/fonts/National2-ExtraBold.otf") format("opentype"); }
-  @font-face { font-family: "National2"; font-style: italic; font-weight: 800; src: url("${FONT_BASE}/fonts/National2-ExtraBoldItalic.otf") format("opentype"); }
-  @font-face { font-family: "National2Narrow"; font-style: normal; font-weight: 400; src: url("${FONT_BASE}/fonts/National2Narrow-Regular.otf") format("opentype"); }
-  @font-face { font-family: "National2Narrow"; font-style: italic; font-weight: 400; src: url("${FONT_BASE}/fonts/National2Narrow-RegularItalic.otf") format("opentype"); }
-  @font-face { font-family: "National2Narrow"; font-style: normal; font-weight: 700; src: url("${FONT_BASE}/fonts/National2Narrow-Bold.otf") format("opentype"); }
-  @font-face { font-family: "National2Narrow"; font-style: normal; font-weight: 800; src: url("${FONT_BASE}/fonts/National2Narrow-ExtraBold.otf") format("opentype"); }
-  @font-face { font-family: "National2Narrow"; font-style: italic; font-weight: 800; src: url("${FONT_BASE}/fonts/National2Narrow-ExtraBoldItalic.otf") format("opentype"); }
+/**
+ * @font-face declarations that the staging Expo build emits in a separate
+ * <style id="expo-generated-fonts"> block. Our preprocessor only extracts
+ * the tamagui-css <style> block, so without re-injecting these here, the
+ * captured DOM falls back to system fonts (Inter is set as font-family
+ * everywhere but no face is registered → browser renders sans-serif /
+ * Helvetica → it looks "wrong").
+ *
+ * Weights match Tamagui's weighted-face model exactly: family "Inter" with
+ * font-weight 400/500/600/700/800/900 picks up Regular/Medium/SemiBold/
+ * Bold/ExtraBold/Black; family "National2" with 400/700/800 picks up
+ * Regular/Bold/ExtraBold; same for National2Narrow.
+ */
+const WEIGHTED_FONT_FACES = `
+  @font-face { font-family: "Inter"; font-style: normal; font-weight: 400; src: url("${FONT_BASE}/fonts/Inter-Regular.otf") format("opentype"); font-display: swap; }
+  @font-face { font-family: "Inter"; font-style: normal; font-weight: 500; src: url("${FONT_BASE}/fonts/Inter-Medium.otf") format("opentype"); font-display: swap; }
+  @font-face { font-family: "Inter"; font-style: normal; font-weight: 600; src: url("${FONT_BASE}/fonts/Inter-SemiBold.otf") format("opentype"); font-display: swap; }
+  @font-face { font-family: "Inter"; font-style: normal; font-weight: 700; src: url("${FONT_BASE}/fonts/Inter-Bold.otf") format("opentype"); font-display: swap; }
+  @font-face { font-family: "Inter"; font-style: normal; font-weight: 800; src: url("${FONT_BASE}/fonts/Inter-ExtraBold.otf") format("opentype"); font-display: swap; }
+  @font-face { font-family: "Inter"; font-style: normal; font-weight: 900; src: url("${FONT_BASE}/fonts/Inter-Black.otf") format("opentype"); font-display: swap; }
+  @font-face { font-family: "Inter"; font-style: italic; font-weight: 400; src: url("${FONT_BASE}/fonts/Inter-Italic.otf") format("opentype"); font-display: swap; }
+  @font-face { font-family: "Inter"; font-style: italic; font-weight: 500; src: url("${FONT_BASE}/fonts/Inter-MediumItalic.otf") format("opentype"); font-display: swap; }
+  @font-face { font-family: "Inter"; font-style: italic; font-weight: 600; src: url("${FONT_BASE}/fonts/Inter-SemiBoldItalic.otf") format("opentype"); font-display: swap; }
+  @font-face { font-family: "Inter"; font-style: italic; font-weight: 800; src: url("${FONT_BASE}/fonts/Inter-ExtraBoldItalic.otf") format("opentype"); font-display: swap; }
+  @font-face { font-family: "National2"; font-style: normal; font-weight: 400; src: url("${FONT_BASE}/fonts/National2-Regular.otf") format("opentype"); font-display: swap; }
+  @font-face { font-family: "National2"; font-style: italic; font-weight: 400; src: url("${FONT_BASE}/fonts/National2-RegularItalic.otf") format("opentype"); font-display: swap; }
+  @font-face { font-family: "National2"; font-style: normal; font-weight: 700; src: url("${FONT_BASE}/fonts/National2-Bold.otf") format("opentype"); font-display: swap; }
+  @font-face { font-family: "National2"; font-style: italic; font-weight: 700; src: url("${FONT_BASE}/fonts/National2-BoldItalic.otf") format("opentype"); font-display: swap; }
+  @font-face { font-family: "National2"; font-style: normal; font-weight: 800; src: url("${FONT_BASE}/fonts/National2-ExtraBold.otf") format("opentype"); font-display: swap; }
+  @font-face { font-family: "National2"; font-style: italic; font-weight: 800; src: url("${FONT_BASE}/fonts/National2-ExtraBoldItalic.otf") format("opentype"); font-display: swap; }
+  @font-face { font-family: "National2Narrow"; font-style: normal; font-weight: 400; src: url("${FONT_BASE}/fonts/National2Narrow-Regular.otf") format("opentype"); font-display: swap; }
+  @font-face { font-family: "National2Narrow"; font-style: italic; font-weight: 400; src: url("${FONT_BASE}/fonts/National2Narrow-RegularItalic.otf") format("opentype"); font-display: swap; }
+  @font-face { font-family: "National2Narrow"; font-style: normal; font-weight: 700; src: url("${FONT_BASE}/fonts/National2Narrow-Bold.otf") format("opentype"); font-display: swap; }
+  @font-face { font-family: "National2Narrow"; font-style: normal; font-weight: 800; src: url("${FONT_BASE}/fonts/National2Narrow-ExtraBold.otf") format("opentype"); font-display: swap; }
+  @font-face { font-family: "National2Narrow"; font-style: italic; font-weight: 800; src: url("${FONT_BASE}/fonts/National2Narrow-ExtraBoldItalic.otf") format("opentype"); font-display: swap; }
 `;
 
 /**
@@ -149,7 +172,7 @@ function buildDocument(innerHTML: string): string {
         background: #FFFFFF;
         font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
       }
-      ${NATIONAL_FONT_FACES}
+      ${WEIGHTED_FONT_FACES}
       ${RESOLVED_CSS}
       [class*="_pos-fixed"][class*="_zi-1000"][class*="_t-0px"] { display: none !important; }
     </style>
